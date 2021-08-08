@@ -1,0 +1,23 @@
+.close-pdf-button{
+	margin-top: 7px;
+	float: right;
+	display: block;
+	color: #ffffff;
+	border-color: rgba(0,0,0,0);
+	background-color: #4e85c8;
+	transition: all 300ms ease 0ms;
+}
+
+.close-pdf-button:hover {
+	color: #ffffff;
+	border-color: rgb(66, 116, 176);
+	border-width: 1px;
+	background-image: initial;
+	background-color: rgb(66, 116, 176);
+}
+
+.pdf-viewer {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
