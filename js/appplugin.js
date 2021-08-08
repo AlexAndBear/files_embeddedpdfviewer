@@ -36,7 +36,7 @@
 				iconClass: 'icon-toggle',
 				permissions: OC.PERMISSION_READ,
 				actionHandler: function (fileName, context) {
-					self.renderPdfViewer(fileName, context.dir, context.fileList);
+					self.show(fileName, context.dir, context.fileList);
 				}
 			});
 			fileActions.setDefault('application/pdf', 'FilesEmbeddedPdfViewer');
@@ -46,27 +46,31 @@
 		 * @param fileName
 		 * @param dir
 		 */
-		renderPdfViewer: function(fileName, dir){
-				var self = this;
-				$.get(
-				OC.generateUrl('/apps/files_embeddedpdfviewer/load'),
-				{
-					fileName: fileName,
-					dir: dir
-				}
-			).done(function(template) {
-				self.onTemplateLoaded(template);
-			});
+		show: function(fileName, dir){
+			var that = this;
+			var oReq = new XMLHttpRequest();
+			oReq.open("GET", Files.getDownloadUrl(fileName, dir), true);
+			oReq.responseType = "arraybuffer";
+
+			oReq.onload = function() {
+				var file = new Blob([this.response], {
+					type: 'application/pdf'
+				});
+				that.onFileLoaded(file);
+			};
+			oReq.send();
 		},
 
 		/**
-		 * @param template
-
+		 * @param file
 		 */
-		onTemplateLoaded: function (template){
+		onFileLoaded: function (file){
+			var fileURL = URL.createObjectURL(file);
+
 			FileList.setViewerMode(true);
+			var template = $('<object data="'+fileURL+'" type="application/pdf" width="100%" height="100%"></object>');
 			$('#app-content #controls').addClass('hidden');
-			$('#app-content').append($(template));
+			$('#app-content').append(template);
 
 			var closeButton = $('<button class="close-pdf-button">' + t('files_embeddedpdfviewer', 'Close PDF') + '</button>').appendTo("#header");
 
