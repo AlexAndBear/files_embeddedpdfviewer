@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<info>
+    <id>files_embdeddedpdfviewer</id>
+    <name>Embedded PDF Viewer</name>
+    <summary>Embedded viewer for PDF files</summary>
+    <description>
+        This application integrates the browsers pdf plugin into ownCloud.
+    </description>
+    <licence>AGPL</licence>
+    <author>Jan Ackermann</author>
+    <version>1.0.0</version>
+    <dependencies>
+        <owncloud min-version="10.2" max-version="10" />
+    </dependencies>
+    <default_enable/>
+    <namespace>Files_EmbeddedPdfViewer</namespace>
+    <website>https://github.com/JanAckermann/files_embeddedpdfviewer</website>
+    <bugs>https://github.com/JanAckermann/files_embeddedpdfviewer/issues</bugs>
+    <category>productivity</category>
+    <repository type="git">https://github.com/JanAckermann/files_embeddedpdfviewer</repository>
+    <ocsid>166049</ocsid>
+    <types>
+        <filesystem/>
+    </types>
+
+</info>
